@@ -8,6 +8,11 @@
 
 #import "AppDelegate.h"
 
+#import "BNTabbarController.h"
+#import "BNLeftController.h"
+#import "BNRightController.h"
+
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +22,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    
+    BNTabbarController  *tab = [[BNTabbarController alloc]init];
+    
+    BNLeftController *left = [[BNLeftController alloc]init];
+    
+    BNRightController *right = [[BNRightController alloc]init];
+    
+    RESideMenu *sideMenu = [[RESideMenu alloc]initWithContentViewController:tab leftMenuViewController:left rightMenuViewController:right];
+    
+    self.window.rootViewController = sideMenu;
+    
+    sideMenu.delegate = self;
+    
+    sideMenu.contentViewShadowColor = [UIColor blackColor];
+    sideMenu.contentViewShadowOffset = CGSizeMake(0, 0);
+    sideMenu.contentViewShadowOpacity = 0.6;
+    sideMenu.contentViewShadowRadius = 12;
+    sideMenu.contentViewShadowEnabled = YES;
+    
+    sideMenu.scaleContentView = NO;
+    
     return YES;
 }
 
